@@ -31,9 +31,11 @@ export default async function RootLayout({children,}: Readonly<{ children: React
         <html lang="en">
         <body>
         <NavBar />
-        <div className="flex min-h-screen flex-col items-center justify-center py-2">
+        {/*<div className="flex min-h-screen flex-col items-center justify-center py-2">*/}
+        <div className="">
             <main
-                className="flex w-full flex-1 shrink-0 flex-col items-center justify-center px-8 text-center sm:px-20">
+                // className="flex w-full flex-1 shrink-0 flex-col items-center justify-center px-8 text-center sm:px-20">
+                className="">
                 {/*<h1 className="mb-12 text-5xl font-bold sm:text-6xl">*/}
                 {/*    Next.js with <span className="font-black text-green-400">Supabase</span>*/}
                 {/*</h1>*/}
