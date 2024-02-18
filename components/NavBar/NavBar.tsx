@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import {useEffect, useState} from 'react';
+import {createClientComponentClient} from '@supabase/auth-helpers-nextjs';
+import Link from "next/link";
 
 const NavBar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -12,14 +13,14 @@ const NavBar = () => {
     useEffect(() => {
         const fetchSession = async () => {
             const {
-                data: { session },
+                data: {session},
             } = await supabase.auth.getSession();
 
             setIsLoggedIn(!!session);
 
             if (session) {
                 const {
-                    data: { user },
+                    data: {user},
                 } = await supabase.auth.getUser();
 
                 console.log(user);
@@ -39,15 +40,18 @@ const NavBar = () => {
                     <img src="mas_logo.png" alt="Company Logo" className="h-8 w-auto"/>
                 </div>
 
+
                 {/* Profile Viewing Button */}
                 {isLoggedIn && (
                     <div>
-                        <button
-                            className="flex items-center space-x-2 bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
-                            <img src={userProfileImageUrl || 'profile_image.png'} alt="Profile"
-                                 className="h-6 w-6 rounded-full"/>
-                            <span>{userEmail}</span>
-                        </button>
+                        <Link href="/profile">
+                            <button
+                                className="flex items-center space-x-2 bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
+                                <img src={userProfileImageUrl || 'profile_image.png'} alt="Profile"
+                                     className="h-6 w-6 rounded-full"/>
+                                <span>{userEmail}</span>
+                            </button>
+                        </Link>
                     </div>
                 )}
             </div>

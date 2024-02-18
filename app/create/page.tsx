@@ -7,43 +7,7 @@ import Image from 'next/image'
 import SignOut from '@/components/SignOut';
 import Design from "@/components/Create/Design";
 import TabComponent from "@/components/Create/TabComponent";
-
-// Main layout component
-const Layout = ({ children }) => (
-    <div className="flex flex-col h-screen">
-        {children}
-    </div>
-);
-
-
-// Header component, if needed
-const Header = () => (
-    <header className="bg-gray-800 text-white">
-        {/* Your header content */}
-    </header>
-);
-
-// Sidebar component for navigation or tools
-const Sidebar = () => (
-    <aside className="w-64 bg-gray-700 text-white">
-        {/* Your sidebar content */}
-    </aside>
-);
-
-// Main content area
-const Content = ({ children }) => (
-    <main className="flex-1 overflow-auto">
-        {children}
-    </main>
-);
-
-// Component for individual frames
-const Frame = ({ title, children }) => (
-    <div className="border p-4 m-4">
-        <h2 className="text-lg">{title}</h2>
-        {children}
-    </div>
-);
+import EditedImageShow from "@/components/Create/EditedImageShow";
 
 
 export default async function Create() {
@@ -89,12 +53,13 @@ export default async function Create() {
                             </div>
                             {/* Working area with flex grow */}
                             <div className="flex flex-col flex-grow relative overflow-hidden">
-                                <Image
-                                    src="/demo_image.png"
-                                    layout="fill"
-                                    objectFit="contain"
-                                    alt="Picture of the author"
-                                />
+                                {/*<Image*/}
+                                {/*    src="/demo_image.png"*/}
+                                {/*    layout="fill"*/}
+                                {/*    objectFit="contain"*/}
+                                {/*    alt="Picture of the author"*/}
+                                {/*/>*/}
+                                <EditedImageShow/>
                             </div>
                         </div>
                     </div>
@@ -109,7 +74,10 @@ export default async function Create() {
                                 placeholder="Your text goes here..."
                             />
                         </div>
-                        <h2 className="text-lg text-white">Text Box</h2>
+                        <div className="p-2" >
+                            <button className="w-full h-10 bg-blue-500 text-white">Generate Image</button>
+                        </div>
+                        {/*<h2 className="text-lg text-white">Text Box</h2>*/}
                     </div>
                 </div>
                 {/* Right side container - Frame 3 */}
