@@ -36,6 +36,7 @@ export default async function RootLayout({children,}: Readonly<{ children: React
             <main
                 // className="flex w-full flex-1 shrink-0 flex-col items-center justify-center px-8 text-center sm:px-20">
                 className="">
+                {/*{console.log("session", session)}*/}
                 {/*<h1 className="mb-12 text-5xl font-bold sm:text-6xl">*/}
                 {/*    Next.js with <span className="font-black text-green-400">Supabase</span>*/}
                 {/*</h1>*/}

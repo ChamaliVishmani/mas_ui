@@ -1,7 +1,7 @@
 // pages/api/supabaseProxy.js
 import { createClient } from '@supabase/supabase-js';
 
-export default async function POST(req, res) {
+export default async function handle(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).json({ message: 'Only POST requests allowed' });
     }
