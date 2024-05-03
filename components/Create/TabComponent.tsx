@@ -1,13 +1,14 @@
 'use client';
 
 import React, {useState} from "react";
-import Design from "@/components/Create/Design";
+import Design from "@/components/Create/Design/Design";
+import {set} from "yaml/dist/schema/yaml-1.1/set";
 
 
 const Edit = () => <div>Edit Component</div>;
 const History = () => <div>History Component</div>;
 
-const TabComponent = () => {
+const TabComponent = ({model, setModel}) => {
     // State to keep track of the selected tab
     const [activeTab, setActiveTab] = useState('Design');
 
@@ -15,7 +16,7 @@ const TabComponent = () => {
     const renderComponent = () => {
         switch (activeTab) {
             case 'Design':
-                return <Design />;
+                return <Design model={model} setModel={setModel}/>;
             case 'Edit':
                 return <Edit />;
             case 'History':
