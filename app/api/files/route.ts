@@ -15,7 +15,6 @@ export async function POST(request: Request, response: Response) {
         const title = res_1.get("title")
         const description = res_1.get("description")
         const file = res_1.get("file")
-        const pageId = res_1.get("pageId")
 
         const {
             data: {user},
@@ -30,7 +29,7 @@ export async function POST(request: Request, response: Response) {
 
                 // get project id from url
                 const random = Math.random().toString(36).substring(7);
-                const filename = pageId + "/" + random + "_" + file?.name;
+                const filename = "/" + random + "_" + file?.name;
                 // console.log("file", file);
                 //
                 console.log("filename", filename);
@@ -45,8 +44,6 @@ export async function POST(request: Request, response: Response) {
                 } else {
                     // project_id, user_id, file_name, description, link, created_at, updated_at
                     const b = await supabase.from("files").insert({
-                        project_id: Number(pageId),
-                        user_id: user.id,
                         file_name: filename,
                         title: title,
                         description: description,

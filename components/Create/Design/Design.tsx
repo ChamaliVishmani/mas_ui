@@ -92,7 +92,7 @@ export default function Design({ model, setModel }) {
                             width={300}
                             height={200}
                         />
-                        <span class="text-sm">Layered paper</span>
+                        <span className="text-sm">Layered paper</span>
                     </div>
                 </div>
             </div>

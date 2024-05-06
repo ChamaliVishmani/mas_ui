@@ -25,6 +25,8 @@ export default function AddFilesIcon({onUploadSuccess}: NewFilesProps) {
         //     console.log(key, value);
         // }
 
+        console.log("formData sending to api", formData);
+
         // Make an API request to your server-side endpoint
         const response = await fetch('/api/files', {
             method: 'POST',

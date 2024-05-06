@@ -1,18 +1,19 @@
 'use client';
 
-import React, { useEffect, useState } from "react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { Database } from "@/types/supabase";
+import React, {useEffect, useState} from "react";
+import {createClientComponentClient} from "@supabase/auth-helpers-nextjs";
+import {Database} from "@/types/supabase";
+import {useRouter} from "next/navigation";
 
 export default function ShowCreate() {
     const [isLoading, setIsLoading] = useState(true);
     const [selectedModel, setSelectedModel] = useState(null);
     const [sessionList, setSessionList] = useState([]);
     const supabase = createClientComponentClient<Database>();
-
+    const router = useRouter();
     useEffect(() => {
         const fetchData = async () => {
-            const { data, error } = await supabase
+            const {data, error} = await supabase
                 .from("session")
                 .select();
 
@@ -30,9 +31,20 @@ export default function ShowCreate() {
         fetchData();
     }, [supabase]);
 
-    const handleCreateSession = () => {
+    const handleCreateSession = async () => {
         // Logic to create a new session goes here
         console.log("Creating a new session...");
+
+        const b = await supabase.from("session").insert({}).select();
+
+        if (b.error) {
+            console.error("Error creating a new session:", b.error);
+            return;
+        }
+
+        console.log("b", b.data[0].id);
+        // Redirect to the new session
+        router.push(`/create/${b.data[0].id}`);
     };
 
     return (
@@ -49,7 +61,10 @@ export default function ShowCreate() {
                         <ul className="mt-4">
                             {sessionList.map((session) => (
                                 <li key={session.id} className="py-2 border-b border-gray-200">
-                                    {session.name}
+                                    <button onClick={() => router.push(`/create/${session.id}`)}
+                                            className="text-blue-500 bg px-10">
+                                        {session.id}
+                                    </button>
                                 </li>
                             ))}
                         </ul>

@@ -12,6 +12,7 @@ export default function NewFiles() {
 
     const addFiles = async (formData: FormData) => {
         setState("loading")
+        console.log("formData", formData);
         const title = String(formData.get("title")) as string | null;
         const description = String(formData.get("description")) as string | null;
         const file = formData.get("projectFile") as File | null;
@@ -52,7 +53,7 @@ export default function NewFiles() {
                     // project_id, user_id, file_name, description, link, created_at, updated_at
                     const b = await supabase.from("files").insert({
                         // project_id: Number(pageId),
-                        user_id: user.id,
+                        // user_id: user.id,
                         file_name: filename,
                         title: title,
                         description: description,
@@ -74,23 +75,23 @@ export default function NewFiles() {
 
 
     // if (mode === "full") {
-    //     return (
-    //         <div>
-    //             <form action={addFiles}
-    //                   className="flex flex-col items-center justify-center p-5 rounded-lg bg-gray-100 shadow-md">
-    //                 <input type="file" name="projectFile"
-    //                        className="w-full p-2 rounded-md border border-gray-300 mb-2"/>
-    //                 <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">
-    //                     Add File
-    //                 </button>
-    //             </form>
-    //         </div>
-    //     );
-    // } else {
         return (
             <div>
-                <AddFilesIcon onUploadSuccess={addFiles}/>
+                <form action={addFiles}
+                      className="flex flex-col items-center justify-center p-5 rounded-lg bg-gray-100 shadow-md">
+                    <input type="file" name="projectFile"
+                           className="w-full p-2 rounded-md border border-gray-300 mb-2"/>
+                    <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">
+                        Add File
+                    </button>
+                </form>
             </div>
-        )
-    // }
+        );
+    // } else {
+    //     return (
+    //         <div>
+    //             <AddFilesIcon onUploadSuccess={addFiles}/>
+    //         </div>
+    //     )
+    // // }
 }
