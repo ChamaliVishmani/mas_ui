@@ -10,6 +10,7 @@ import Image from 'next/image'
 import TabComponent from "@/components/Create/TabComponent";
 // import EditedImageShow from "@/components/Create/EditedImageShow";
 import React, {useEffect, useRef, useState} from "react";
+import FabricCanvas from "@/app/create/[id]/Edit";
 
 
 
@@ -179,7 +180,11 @@ export default async function Create() {
                                 {/*/>*/}
                                 {result && (
                                     <div>
-                                        <Image src={result} alt="Generated Image" layout="fill" objectFit="contain" />
+                                        <Image src={result} alt="Generated Image" layout="fill" objectFit="contain"/>
+                                        <div>
+                                            <h1>Draw on Image</h1>
+                                            <FabricCanvas src="profile_page_image.png"/>
+                                        </div>
                                     </div>
                                 )}
                                 {/*<EditedImageShow/>*/}
