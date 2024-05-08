@@ -2,16 +2,21 @@
 
 import React, { useState } from "react";
 import Design from "@/components/Create/Design/Design";
-import { set } from "yaml/dist/schema/yaml-1.1/set";
+
 import ChatBot from "@/components/Create/ChatBot/chatBot";
 
-const Edit = () => <div>Edit Component</div>;
-const History = () => <div>History Component</div>;
+import {set} from "yaml/dist/schema/yaml-1.1/set";
+import Edit from "@/components/Create/Edit/Edit";
+import History from "@/components/Create/History/History";
+
+
+
+// const Edit = () => <div>Edit Component</div>;
+// const History = () => <div>History Component</div>;
 
 const TabComponent = ({ model, setModel }) => {
   // State to keep track of the selected tab
   const [activeTab, setActiveTab] = useState("Design");
-
   // Function to render the correct component based on the active tab
   const renderComponent = () => {
     switch (activeTab) {
