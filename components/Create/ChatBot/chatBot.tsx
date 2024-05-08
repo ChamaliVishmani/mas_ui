@@ -42,7 +42,7 @@ export default function ChatBot() {
         },
         body: JSON.stringify({
           question: user_input.trim(),
-          session_id: "abc12345",
+          session_id: "abc1@234567",
         }), // TODO - add session id
       });
 
@@ -57,20 +57,21 @@ export default function ChatBot() {
         ...messages,
         { id: Date.now(), message: assistant_answer, sender: "bot" },
       ]);
+      setUserInput("");
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col jsutify-center items-center">
-      <div className="bg-white p-6 rounded shadow w-96">
-        <div className="overflow-auto h-80">
+    <div className="bg-gray-100 flex flex-col jsutify-center items-center ">
+      <div className="flex-1 w-full p-3 ">
+        <div className="g-white p-3 overflow-auto max-h-[60vh]">
           {messages.map((message) => (
             <div
               key={message.id}
-              className={`my-2 p-2 rounded ${
+              className={`my-2 p-2 rounded text-white ${
                 message.sender == "user"
-                  ? "bg-blue-200 self-end"
-                  : "bg-green-200 self-start"
+                  ? "bg-gray-600 self-end ml-10"
+                  : "bg-blue-600 self-start mr-10"
               }`}
             >
               {message.message}
@@ -87,7 +88,7 @@ export default function ChatBot() {
         />
         <button
           onClick={sendMessage}
-          className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="mt-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           Send
         </button>
