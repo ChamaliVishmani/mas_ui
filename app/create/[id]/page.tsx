@@ -9,7 +9,9 @@ import Image from "next/image";
 // import Design from "@/components/Create/Design";
 import TabComponent from "@/components/Create/TabComponent";
 // import EditedImageShow from "@/components/Create/EditedImageShow";
-import React, { useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
+import FabricCanvas from "@/app/create/[id]/Edit";
+
 
 // import copy from "copy-to-clipboard";
 
@@ -153,6 +155,7 @@ export default async function Create() {
     setOptimizedPrompt("");
   };
 
+
   const optimizePrompt = async () => {
     const new_user_input_prompt = textareaRef.current.value;
     const existing_prompt = optimizedPrompt;
@@ -183,31 +186,111 @@ export default async function Create() {
     }
   };
 
-  return (
-    <div>
-      {/*<h2>User Profile</h2>*/}
-      {/*<code className="highlight">{user.email}</code>*/}
-      {/*<div className="heading">Last Signed In:</div>*/}
-      {/*<code className="highlight">{new Date(user.last_sign_in_at).toUTCString()}</code>*/}
-      {/*<Link className="button" href="/">*/}
-      {/*    Go Home*/}
-      {/*</Link>*/}
-      {/*<SignOut/>*/}
-      <div className="flex h-screen pt-16">
-        {/* Left side container */}
-        <div className="flex flex-col w-3/4 overflow-hidden">
-          {/* Frame 1 */}
-          <div className="flex overflow-auto p-4" style={{ flex: "14" }}>
-            {/* Frame 1.1 - Button Section */}
-            <div className="w-1/8 bg-gray-200 p-2 space-y-2">
-              {/* List of buttons */}
-              <button className="w-full h-10 bg-blue-500 text-white">
-                Button 1
-              </button>
-              <button className="w-full h-10 bg-blue-500 text-white">
-                Button 2
-              </button>
-              {/* Add more buttons as needed */}
+    return (
+        <div>
+            {/*<h2>User Profile</h2>*/}
+            {/*<code className="highlight">{user.email}</code>*/}
+            {/*<div className="heading">Last Signed In:</div>*/}
+            {/*<code className="highlight">{new Date(user.last_sign_in_at).toUTCString()}</code>*/}
+            {/*<Link className="button" href="/">*/}
+            {/*    Go Home*/}
+            {/*</Link>*/}
+            {/*<SignOut/>*/}
+            <div className="flex h-screen pt-16">
+                {/* Left side container */}
+                <div className="flex flex-col w-3/4 overflow-hidden">
+                    {/* Frame 1 */}
+                    <div className="flex overflow-auto p-4" style={{flex: '14'}}>
+                        {/* Frame 1.1 - Button Section */}
+                        <div className="w-1/8 bg-gray-200 p-2 space-y-2">
+                            {/* List of buttons */}
+                            <button className="w-full h-10 bg-blue-500 text-white">Button 1</button>
+                            <button className="w-full h-10 bg-blue-500 text-white">Button 2</button>
+                            {/* Add more buttons as needed */}
+                        </div>
+                        {/* Frame 1.2 - Working Area with Tabs */}
+                        <div className="flex-1 bg-white p-2 flex flex-col">
+                            {/* Tabs */}
+                            <div className="border-b-2">
+                                {/* Tab buttons */}
+                                <button className="px-4 py-2">Working Area</button>
+                                <button className="px-4 py-2">History</button>
+                            </div>
+                            {/* Working area with flex grow */}
+                            <div className="flex flex-col flex-grow relative overflow-hidden">
+                                {/*<Image*/}
+                                {/*    src="/demo_image.png"*/}
+                                {/*    layout="fill"*/}
+                                {/*    objectFit="contain"*/}
+                                {/*    alt="Picture of the author"*/}
+                                {/*/>*/}
+                                {result && (
+                                    <div>
+                                        <Image src={result} alt="Generated Image" layout="fill" objectFit="contain"/>
+                                        <div>
+                                            <h1>Draw on Image</h1>
+                                            {/*<FabricCanvas src="profile_page_image.png"/>*/}
+                                        </div>
+                                    </div>
+                                )}
+                                {/*<EditedImageShow/>*/}
+                            </div>
+                        </div>
+                    </div>
+                    {/* Frame 2 */}
+                    <div className="px-4" style={{flex: '3'}}>
+                        <h2 className="text-lg text-white">Text Box</h2>
+                        {/* Container for Scrollable Text Box in Frame 2 */}
+                        <div
+                            className="p-2"> {/* Adjust the height calculation as needed */}
+                            {/*<textarea*/}
+                            {/*    className="w-full resize-none" // `resize-none` to prevent manual resizing*/}
+                            {/*    placeholder="Your text goes here..."*/}
+                            {/*    value={text}*/}
+                            {/*    onChange={(e) => setText(e.target.value)}*/}
+                            {/*/>*/}
+                            <textarea
+                                className="w-full resize-none"
+                                placeholder="Your text goes here..."
+                                ref={textareaRef}
+                                // value={text}
+                                // onChange={(e) => setText(e.target.value)}
+                            />
+
+                            {/*{textareaRef.current.value && (*/}
+                            {/*    <div>*/}
+                            {/*        <p className="text-white">{textareaRef.current.value}</p>*/}
+                            {/*    </div>*/}
+                            {/*)}*/}
+                        </div>
+                        <div className="p-2" onClick={callTextToImageAPI}>
+                            <button
+                                className="w-full h-10 bg-blue-500 text-white">{loading ? 'Loading...' : 'Generate Image'}</button>
+                        </div>
+                        <h2 className="text-lg text-white">Text Box</h2>
+                    </div>
+                </div>
+                {/* Right side container - Frame 3 */}
+                <div className="w-1/4 overflow-auto p-4">
+                    {/* Tabs for Frame 3 */}
+                    <div className="border-b-2">
+                        {/*<button className="px-4 py-2 text-white">Design</button>*/}
+                        {/*<button className="px-4 py-2 text-white">Edit</button>*/}
+                        {/*<div className="flex space-x-4 mb-4">*/}
+                        {/*    <button className="bg-blue-600 px-4 py-2 rounded">Design</button>*/}
+                        {/*    <button className="bg-gray-700 px-4 py-2 rounded">Edit</button>*/}
+                        {/*    <button className="bg-gray-700 px-4 py-2 rounded">Edit</button>*/}
+                        {/*</div>*/}
+                        {/*<Design/>*/}
+                        <TabComponent model={model} setModel={setModel}/>
+                        {/* Add more component tabs as needed */}
+                    </div>
+                    {/* Content of Frame 3 */}
+                    <div className="mt-4">
+                        {/* Component content based on selected tab */}
+                    </div>
+                </div>
+
             </div>
             {/* Frame 1.2 - Working Area with Tabs */}
             <div className="flex-1 bg-white p-2 flex flex-col">
