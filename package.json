@@ -16,6 +16,7 @@
     "@supabase/supabase-js": "^2.38.4",
     "axios": "^1.6.8",
     "classnames": "^2.5.1",
+    "copy-to-clipboard": "^3.3.3",
     "cors": "^2.8.5",
     "formik": "^2.4.5",
     "next": "14.1.0",
