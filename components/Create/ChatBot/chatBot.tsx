@@ -10,6 +10,22 @@ export default function ChatBot() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [user_input, setUserInput] = useState("");
 
+  const findAssistantAnswer = (answer: string) => {
+    const assistantPattern = "Assistant: (.*?)(?:Human:|$)";
+    const aiPattern = "AI: (.*?)(?:Human:|$)";
+    const assistantRegex = new RegExp(assistantPattern, "s");
+    const aiRegex = new RegExp(aiPattern, "s");
+
+    const assistantMatch = assistantRegex.exec(answer);
+
+    if (assistantMatch) {
+      return assistantMatch[1];
+    } else {
+      const aiMatch = aiRegex.exec(answer);
+      return aiMatch ? aiMatch[1].replace(/AI:/g, "") : "";
+    }
+  };
+
   const sendMessage = async () => {
     if (user_input.trim()) {
       const newMessage = {
@@ -27,19 +43,19 @@ export default function ChatBot() {
         body: JSON.stringify({
           question: user_input.trim(),
           session_id: "abc12345",
-        }), // TODO add session id
+        }), // TODO - add session id
       });
 
       if (!response.ok) {
-        console.log("error: ", response);
-        return;
+        throw new Error("Unable to get response from the chatbot.");
       }
       const responseJson = await response.json();
-      console.log("answer: ", responseJson.answer.answer);
+
+      const assistant_answer = findAssistantAnswer(responseJson.answer.answer);
 
       setMessages((messages) => [
         ...messages,
-        { id: Date.now(), message: responseJson.answer.answer, sender: "bot" },
+        { id: Date.now(), message: assistant_answer, sender: "bot" },
       ]);
     }
   };
