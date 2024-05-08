@@ -183,7 +183,7 @@ export default async function Create() {
                                         <Image src={result} alt="Generated Image" layout="fill" objectFit="contain"/>
                                         <div>
                                             <h1>Draw on Image</h1>
-                                            <FabricCanvas src="profile_page_image.png"/>
+                                            {/*<FabricCanvas src="profile_page_image.png"/>*/}
                                         </div>
                                     </div>
                                 )}
@@ -233,7 +233,7 @@ export default async function Create() {
                         {/*<div className="flex space-x-4 mb-4">*/}
                         {/*    <button className="bg-blue-600 px-4 py-2 rounded">Design</button>*/}
                         {/*    <button className="bg-gray-700 px-4 py-2 rounded">Edit</button>*/}
-                        {/*    <button className="bg-gray-700 px-4 py-2 rounded">History</button>*/}
+                        {/*    <button className="bg-gray-700 px-4 py-2 rounded">Edit</button>*/}
                         {/*</div>*/}
                         {/*<Design/>*/}
                         <TabComponent model={model} setModel={setModel}/>

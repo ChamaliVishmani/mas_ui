@@ -3,10 +3,12 @@
 import React, {useState} from "react";
 import Design from "@/components/Create/Design/Design";
 import {set} from "yaml/dist/schema/yaml-1.1/set";
+import Edit from "@/components/Create/Edit/Edit";
+import History from "@/components/Create/History/History";
 
 
-const Edit = () => <div>Edit Component</div>;
-const History = () => <div>History Component</div>;
+// const Edit = () => <div>Edit Component</div>;
+// const History = () => <div>History Component</div>;
 
 const TabComponent = ({model, setModel}) => {
     // State to keep track of the selected tab
@@ -18,9 +20,9 @@ const TabComponent = ({model, setModel}) => {
             case 'Design':
                 return <Design model={model} setModel={setModel}/>;
             case 'Edit':
-                return <Edit />;
+                return <Edit model={model} setModel={setModel} />;
             case 'History':
-                return <History />;
+                return <History model={model} setModel={setModel} />;
             default:
                 return null; // Or return a default component
         }
