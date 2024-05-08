@@ -9,6 +9,7 @@ import Image from 'next/image'
 // import Design from "@/components/Create/Design";
 import TabComponent from "@/components/Create/TabComponent";
 // import EditedImageShow from "@/components/Create/EditedImageShow";
+
 import React, {useEffect, useRef, useState} from "react";
 import FabricCanvas from "@/app/create/[id]/Edit";
 
@@ -140,6 +141,92 @@ export default async function Create() {
     };
 
 
+
+<!--   const optimizePrompt = async () => {
+    const new_user_input_prompt = textareaRef.current.value;
+    const existing_prompt = optimizedPrompt;
+
+    if (new_user_input_prompt) {
+      const response = await fetch(
+        "http://127.0.0.1:8000/optimize_text_prompt",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            existing_prompt: existing_prompt,
+            new_user_input_prompt: new_user_input_prompt,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Unable to optimize text.");
+      }
+      const responseJson = await response.json();
+
+      const generated_text = responseJson.optimized_prompt[0].generated_text;
+
+      setOptimizedPrompt(generated_text);
+    }
+  };
+
+  return (
+    <div>
+      {/*<h2>User Profile</h2>*/}
+      {/*<code className="highlight">{user.email}</code>*/}
+      {/*<div className="heading">Last Signed In:</div>*/}
+      {/*<code className="highlight">{new Date(user.last_sign_in_at).toUTCString()}</code>*/}
+      {/*<Link className="button" href="/">*/}
+      {/*    Go Home*/}
+      {/*</Link>*/}
+      {/*<SignOut/>*/}
+      <div className="flex h-screen pt-16">
+        {/* Left side container */}
+        <div className="flex flex-col w-3/4 overflow-hidden">
+          {/* Frame 1 */}
+          <div className="flex overflow-auto p-4" style={{ flex: "14" }}>
+            {/* Frame 1.1 - Button Section */}
+            <div className="w-1/8 bg-gray-200 p-2 space-y-2">
+              {/* List of buttons */}
+              <button className="w-full h-10 bg-blue-500 text-white">
+                Button 1
+              </button>
+              <button className="w-full h-10 bg-blue-500 text-white">
+                Button 2
+              </button>
+              {/* Add more buttons as needed */}
+            </div>
+            {/* Frame 1.2 - Working Area with Tabs */}
+            <div className="flex-1 bg-white p-2 flex flex-col">
+              {/* Tabs */}
+              <div className="border-b-2">
+                {/* Tab buttons */}
+                <button className="px-4 py-2">Working Area</button>
+                <button className="px-4 py-2">History</button>
+              </div>
+              {/* Working area with flex grow */}
+              <div className="flex flex-col flex-grow relative overflow-hidden">
+                {/*<Image*/}
+                {/*    src="/demo_image.png"*/}
+                {/*    layout="fill"*/}
+                {/*    objectFit="contain"*/}
+                {/*    alt="Picture of the author"*/}
+                {/*/>*/}
+                {result && (
+                  <div>
+                    <Image
+                      src={result}
+                      alt="Generated Image"
+                      layout="fill"
+                      objectFit="contain"
+                    />
+                  </div>
+                )}
+                {/*<EditedImageShow/>*/}
+              </div> -->
+
     return (
         <div>
             {/*<h2>User Profile</h2>*/}
@@ -244,6 +331,7 @@ export default async function Create() {
                         {/* Component content based on selected tab */}
                     </div>
                 </div>
+
             </div>
         </div>
     );
