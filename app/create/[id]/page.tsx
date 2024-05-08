@@ -11,7 +11,7 @@ import TabComponent from "@/components/Create/TabComponent";
 // import EditedImageShow from "@/components/Create/EditedImageShow";
 import React, { useEffect, useRef, useState } from "react";
 
-import copy from "copy-to-clipboard";
+// import copy from "copy-to-clipboard";
 
 export default async function Create() {
   // const supabase = createServerComponentClient({cookies});
@@ -143,12 +143,19 @@ export default async function Create() {
 
   const handleOptimizedPromptCopy = () => {
     if (optimizedPrompt) {
-      copy(optimizedPrompt);
+      //   copy(optimizedPrompt);
+      textareaRef.current.value = optimizedPrompt;
     }
+  };
+
+  const handleClearPrompts = () => {
+    textareaRef.current.value = "";
+    setOptimizedPrompt("");
   };
 
   const optimizePrompt = async () => {
     const new_user_input_prompt = textareaRef.current.value;
+    const existing_prompt = optimizedPrompt;
 
     if (new_user_input_prompt) {
       const response = await fetch(
@@ -159,7 +166,7 @@ export default async function Create() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            existing_prompt: optimizedPrompt,
+            existing_prompt: existing_prompt,
             new_user_input_prompt: new_user_input_prompt,
           }),
         }
@@ -236,8 +243,7 @@ export default async function Create() {
           <div className="px-4" style={{ flex: "3" }}>
             <h2 className="text-lg text-white">Text Box</h2>
             {/* Container for Scrollable Text Box in Frame 2 */}
-            <div className="p-2">
-              {" "}
+            <div className="flex items-center justify-between px-2 w-full">
               {/* Adjust the height calculation as needed */}
               {/*<textarea*/}
               {/*    className="w-full resize-none" // `resize-none` to prevent manual resizing*/}
@@ -246,12 +252,22 @@ export default async function Create() {
               {/*    onChange={(e) => setText(e.target.value)}*/}
               {/*/>*/}
               <textarea
-                className="w-full resize-none text-black "
+                className="w-full resize-none text-black p-2 m-2"
                 placeholder="Your text goes here..."
                 ref={textareaRef}
                 // value={text}
                 // onChange={(e) => setText(e.target.value)}
               />
+              {optimizedPrompt != "" && (
+                <button
+                  className="bg-blue-500 text-white p-2 rounded flex-shrink-0"
+                  onClick={handleClearPrompts}
+                  style={{ marginLeft: "auto" }}
+                >
+                  {"Clear text prompts"}
+                </button>
+              )}
+
               {/*{textareaRef.current.value && (*/}
               {/*    <div>*/}
               {/*        <p className="text-white">{textareaRef.current.value}</p>*/}
@@ -262,7 +278,9 @@ export default async function Create() {
             <div className="flex items-center justify-between px-2 w-full">
               {optimizedPrompt != "" && (
                 <>
-                  <h3 className="text-md text-white">Optimized Text Prompt</h3>
+                  <h3 className="text-md text-white m-2">
+                    Optimized Text Prompt
+                  </h3>
                   <div className="border border-white bg-gray-800 p-2 overflow-auto max-h-40">
                     {optimizedPrompt}
                   </div>
